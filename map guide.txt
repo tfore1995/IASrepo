@@ -1,3 +1,5 @@
 00 : water
 01 : sand
 02 : grass
+03 : dirt
+04 : gravel

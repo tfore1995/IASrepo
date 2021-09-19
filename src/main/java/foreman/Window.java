@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import texture.Texture;
+
 public class Window extends JPanel
 {
     public static final int NUM_ROWS = 10;
@@ -26,7 +28,12 @@ public class Window extends JPanel
 
     public static final int PREFERRED_GRID_SIZE_PIXELS = 100;
     
+    Texture texture = new Texture();
     BufferedImage water = null;
+    BufferedImage image;
+    int locationx = 5;
+    int locationy = 5;
+    Coordinates coordinates = Coordinates.getInstance();
     
     public Window()
     {
@@ -39,6 +46,7 @@ public class Window extends JPanel
         int preferredWidth = NUM_COLS * PREFERRED_GRID_SIZE_PIXELS;
         int preferredHeight = NUM_ROWS * PREFERRED_GRID_SIZE_PIXELS;
         setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+//        System.out.println(coordinates.toString());
     }
     
     
@@ -52,21 +60,44 @@ public class Window extends JPanel
         int rectWidth = PREFERRED_GRID_SIZE_PIXELS;
         int rectHeight = PREFERRED_GRID_SIZE_PIXELS;
 
-        for (int i = -1; i < NUM_ROWS + 1; i++) {
-            for (int j = -1; j < NUM_COLS + 1; j++) {
+        
+        
+        for (int i = -1; i < NUM_COLS + 1; i++) {
+            for (int j = -1; j < NUM_ROWS + 1; j++) {
+            	g.setColor(Color.BLACK);
                 // Upper left corner of this terrain rect
-                int x = j * rectWidth;
-                int y = i * rectHeight;
+                int x = i * rectWidth;
+                int y = j * rectHeight;
 //                Color terrainColor = terrainGrid[i][j];
 //                g.setColor(terrainColor);
 //                g.fillRect(x, y, rectWidth, rectHeight);
-                g.drawImage(water, x, y, rectWidth, rectHeight, null);
+//                g.drawImage(water, x, y, rectWidth, rectHeight, null);
+                String key;
+                try
+                {
+                	key = coordinates.getCoordinate(i, j);
+                	image = texture.getImage(key);
+                	g.drawImage(image, x, y, rectWidth, rectHeight, null);
+//                	System.out.println("Key : " + key);
+//                	System.out.println("i : " + i);
+//                	System.out.println("j : " + j);
+                }
+                catch (Exception e)
+                {
+                	System.out.println(e);
+                	g.fillRect(x, y, rectWidth, rectHeight);
+                }
+                
+                               
+                g.setColor(Color.RED);
                 g.drawRect(x, y, rectWidth, rectHeight);
 //                System.out.println("(i,j) : " + "(" + i + "," + j + ")");
 //                System.out.println("(x,y) : " + "(" + x + "," + y + ")");
                 
             }
         }
+        g.setColor(Color.RED);
+        g.fillOval(locationx * rectWidth, locationy * rectHeight, rectWidth, rectHeight);
         
 //        g.drawImage(water, 700, 200, rectWidth, rectHeight, null);
 //        g.drawRect(700, 200, rectWidth, rectHeight);

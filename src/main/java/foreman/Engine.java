@@ -39,7 +39,7 @@ public class Engine {
 		
 		FileService fileService = new FileService();
 		map = fileService.loadMap("map.txt");
-		
+//		System.out.println(map.toString());
 		
 //		System.out.println(map.getCoordinate(defaultLocation));
 		

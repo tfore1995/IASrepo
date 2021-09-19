@@ -1,7 +1,7 @@
 package texture;
 
 public class Water extends Texture{
-	public Water() {
-		img = "water.jpg";
-	}
+//	public Water() {
+//		img = "water.jpg";
+//	}
 }

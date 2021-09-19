@@ -5,12 +5,12 @@ import java.util.HashMap;
 public class Coordinates 
 {
 	private static Coordinates single_instance = null;
-	private static HashMap<String, String> map;
+	private static HashMap<String, String> map = new HashMap<String, String>();;
 	
 	
 	public Coordinates()
 	{
-		map = new HashMap<String, String>();
+		
 	}
 	public static Coordinates getInstance()
 	{
@@ -34,5 +34,9 @@ public class Coordinates
 	{
 		String key = "(" + x + "," + y + ")";
 		map.put(key, value);
+	}
+	@Override
+	public String toString() {
+		return map.toString();
 	}
 }
