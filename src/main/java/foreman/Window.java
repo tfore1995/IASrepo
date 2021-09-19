@@ -73,22 +73,42 @@ public class Window extends JPanel
 //                g.fillRect(x, y, rectWidth, rectHeight);
 //                g.drawImage(water, x, y, rectWidth, rectHeight, null);
                 String key;
-                try
-                {
-                	key = coordinates.getCoordinate(i, j);
-                	image = texture.getImage(key);
-                	g.drawImage(image, x, y, rectWidth, rectHeight, null);
-//                	System.out.println("Key : " + key);
-//                	System.out.println("i : " + i);
-//                	System.out.println("j : " + j);
-                }
-                catch (Exception e)
-                {
-                	System.out.println(e);
-                	g.fillRect(x, y, rectWidth, rectHeight);
-                }
+//                try
+//                {
+//                	key = coordinates.getCoordinate(i, j);
+//                	image = texture.getImage(key);
+//                	g.drawImage(image, x, y, rectWidth, rectHeight, null);
+////                	System.out.println("Key : " + key);
+////                	System.out.println("i : " + i);
+////                	System.out.println("j : " + j);
+//                }
+//                catch (Exception e)
+//                {
+//                	System.out.println(e);
+//                	g.fillRect(x, y, rectWidth, rectHeight);
+//                }
+
                 
-                               
+            	key = coordinates.getCoordinate(i, j);
+            	if(key != null)
+            	{
+	            	image = texture.getImage(key);
+            	}
+            	else
+            	{
+            		image = null;
+            	}
+            	
+            	if(image != null)
+            	{
+	            	g.drawImage(image, x, y, rectWidth, rectHeight, null);
+            	}
+            	else
+            	{
+	            	g.fillRect(x, y, rectWidth, rectHeight);
+            	}
+
+            
                 g.setColor(Color.RED);
                 g.drawRect(x, y, rectWidth, rectHeight);
 //                System.out.println("(i,j) : " + "(" + i + "," + j + ")");
