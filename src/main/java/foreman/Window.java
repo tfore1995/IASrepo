@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Label;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +23,9 @@ import javax.swing.JPanel;
 
 import texture.Texture;
 
-public class Window extends JPanel
+public class Window extends JPanel implements KeyListener
 {
-    public static final int NUM_ROWS = 10;
+    public static final int NUM_ROWS = 9;
     public static final int NUM_COLS = 15;
 
     public static final int PREFERRED_GRID_SIZE_PIXELS = 100;
@@ -34,6 +36,7 @@ public class Window extends JPanel
     int locationx = 5;
     int locationy = 5;
     Coordinates coordinates = Coordinates.getInstance();
+    Player player = new Player();
     
     public Window()
     {
@@ -47,6 +50,10 @@ public class Window extends JPanel
         int preferredHeight = NUM_ROWS * PREFERRED_GRID_SIZE_PIXELS;
         setPreferredSize(new Dimension(preferredWidth, preferredHeight));
 //        System.out.println(coordinates.toString());
+        addKeyListener(this);
+        
+        this.setFocusable(true);
+        this.requestFocusInWindow();
     }
     
     
@@ -117,11 +124,57 @@ public class Window extends JPanel
             }
         }
         g.setColor(Color.RED);
-        g.fillOval(locationx * rectWidth, locationy * rectHeight, rectWidth, rectHeight);
+//        g.fillOval(locationx * rectWidth, locationy * rectHeight, rectWidth, rectHeight);
+        g.fillOval(player.getLocationx() * rectWidth, player.getLocationy() * rectHeight, rectWidth, rectHeight);
         
 //        g.drawImage(water, 700, 200, rectWidth, rectHeight, null);
 //        g.drawRect(700, 200, rectWidth, rectHeight);
     }
+    
+    public void keyPressed(KeyEvent e) {
+
+//    	System.out.println("Pressed " + e.getKeyChar());
+//    	System.out.println("Code  " + e.getKeyCode());
+    }
+
+
+	public void keyReleased(KeyEvent e) {
+//		System.out.println("Released " + e.getKeyChar());
+//    	System.out.println("Code  " + e.getKeyCode());
+		switch (e.getKeyCode())
+		{
+		case 38:
+			//up
+			System.out.println("up");
+			player.moveY(-1);
+			break;
+		case 37:
+			//left
+			System.out.println("left");
+			player.moveX(-1);
+			break;
+		case 39:
+			//right
+			System.out.println("right");
+			player.moveX(1);
+			break;
+		case 40:
+			//down
+			System.out.println("down");
+			player.moveY(1);
+			break;
+		}
+		
+		this.repaint();
+	}
+
+
+	public void keyTyped(KeyEvent e) {
+//		System.out.println("Typed " + e.getKeyChar());
+//    	System.out.println("Code  " + e.getKeyCode());
+		
+		
+	}
 	
 
 }
