@@ -33,8 +33,8 @@ public class Window extends JPanel implements KeyListener
     Texture texture = new Texture();
     BufferedImage water = null;
     BufferedImage image;
-    int locationx = 5;
-    int locationy = 5;
+    int locationx = NUM_COLS/2;
+    int locationy = NUM_ROWS/2;
     Coordinates coordinates = Coordinates.getInstance();
     Player player = new Player();
     
@@ -126,9 +126,11 @@ public class Window extends JPanel implements KeyListener
         g.setColor(Color.RED);
 //        g.fillOval(locationx * rectWidth, locationy * rectHeight, rectWidth, rectHeight);
         g.fillOval(player.getLocationx() * rectWidth, player.getLocationy() * rectHeight, rectWidth, rectHeight);
-        
+        g.drawOval(locationx * rectWidth, locationy * rectHeight, rectWidth, rectHeight);
 //        g.drawImage(water, 700, 200, rectWidth, rectHeight, null);
 //        g.drawRect(700, 200, rectWidth, rectHeight);
+//        System.out.println(locationx);
+//        System.out.println(locationy);
     }
     
     public void keyPressed(KeyEvent e) {
